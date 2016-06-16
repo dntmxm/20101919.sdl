@@ -34,19 +34,17 @@ bool Game::init(const char* title, int xpos, int ypos,
 	else {
 		return false; // sdl could not initialize
 	}
+	m_state = State::Menu;
+	m_oldState = State::Menu;
 	
-
-	m_pGameStateMachine = new GameStateMachine();
-	m_pGameStateMachine->changeState(new MainMenuState());
-
 	TheGameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
 	TheGameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
 	TheGameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
 	TheGameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
 	
+	m_pGameStateMachine = new GameStateMachine();
+	m_pGameStateMachine->changeState(new MainMenuState());
 
-	m_state = State::Menu;
-	m_oldState = State::Menu;
 	return true;
 }
 

@@ -30,15 +30,6 @@ void MenuState::render()
 
 bool MenuState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("assets/button.png", "playbutton", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
-	if (!TheTextureManager::Instance()->load("assets/exit.png", "exitbutton", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
-
 	StateParser stateParser;
 	stateParser.parseState("text.xml", s_menuID, &m_gameObjects, &m_textureIDList);
 	
@@ -57,9 +48,6 @@ bool MenuState::onExit()
 	}
 	m_gameObjects.clear();
 
-	TheTextureManager::Instance()->clearFromTextureMap("playbutton");
-
-	TheTextureManager::Instance()->clearFromTextureMap("exitbutton");
 	return true;
 }
 

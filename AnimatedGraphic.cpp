@@ -23,6 +23,6 @@ void AnimatedGraphic::clean()
 
 void AnimatedGraphic::load(const LoaderParams* pParams)
 {
-	SDLGameObject::load(pParams);
 	m_animSpeed = pParams->getAnimSpeed();
+	SDLGameObject::load(pParams);
 }

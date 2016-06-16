@@ -26,14 +26,13 @@ void PlayState::update()
 	{
 		m_gameObjects[i]->update();
 	}
-
-	if (checkCollision(
-		dynamic_cast<SDLGameObject*>(m_gameObjects[0]),
-		dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
+	
+	if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]),dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
 	{
 		/*TheGame::Instance()->getStateMachine()->changeState(new GameOverState());*/
 		TheGame::Instance()->setState(State::GameOver);
 	}
+	
 }
 
 void PlayState::render()
@@ -43,18 +42,22 @@ void PlayState::render()
 		m_gameObjects[i]->draw();
 	}
 }
+void PlayState::setCallbacks(const std::vector<Callback>& callbacks)
+{
+	// go through the game objects
+	for (int i = 0; i < m_gameObjects.size(); i++)
+	{
+		// if they are of type MenuButton then assign a callback based on the id passed in from the file
+		if (dynamic_cast<MenuButton*>(m_gameObjects[i]))
+		{
+			MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+			pButton->setcallback(callbacks[pButton->getcallbackID()]);
+		}
+	}
+}
 
 bool PlayState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("assets/helicopter.png", "helicopter", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
-	if (!TheTextureManager::Instance()->load("assets/helicopter2.png", "helicopter2", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
-
 	StateParser stateParser;
 	stateParser.parseState("text.xml", s_playID, &m_gameObjects, &m_textureIDList);
 

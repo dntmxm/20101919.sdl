@@ -33,8 +33,7 @@ void GameStateMachine::changeState(GameState *pState)
 		}
 	}
 	// push back our new state
-	m_gameStates.push_back(pState);
-	m_gameStates.back()->onEnter();
+	pushState(pState);
 }
 
 void GameStateMachine::update()

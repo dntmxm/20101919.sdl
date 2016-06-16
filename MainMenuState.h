@@ -7,11 +7,11 @@
 class MainMenuState : public MenuState
 {
 public:
-	virtual void Update();
-	virtual void Render();
-	virtual bool OnEnter();
-	virtual bool OnExit();
-	virtual std::string GetStateID() const { return s_menuID; }
+	virtual void update();
+	virtual void render();
+	virtual bool onEnter();
+	virtual bool onExit();
+	virtual std::string getStateID() const { return s_menuID; }
 private:
 	virtual void setCallbacks(const std::vector<Callback>& callbacks);
 

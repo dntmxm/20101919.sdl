@@ -83,10 +83,8 @@ void StateParser::parseObjects(XMLElement* pStateRoot,
 		animSpeed = e->IntAttribute("animSpeed");
 
 		textureID = e->Attribute("textureID");
-		GameObject* pGameObject = TheGameObjectFactory::Instance()
-			->create(e->Attribute("type"));
-		pGameObject->load(new LoaderParams
-			(x, y, width, height, textureID, numFrames, callbackID, animSpeed));
+		GameObject* pGameObject = TheGameObjectFactory::Instance()->create(e->Attribute("type"));
+		pGameObject->load(new LoaderParams(x, y, width, height, textureID, numFrames, callbackID, animSpeed));
 		pObjects->push_back(pGameObject);
 	}
 }

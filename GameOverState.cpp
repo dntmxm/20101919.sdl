@@ -6,7 +6,7 @@
 #include "AnimatedGraphic.h"
 #include "MenuButton.h"
 #include "GameStateMachine.h"
-#include "MenuState.h"
+#include "MainMenuState.h"
 #include "PlayState.h"
 #include "StateParser.h"
 
@@ -14,21 +14,6 @@ const std::string GameOverState::s_gameOverID = "GAMEOVER";
 
 bool GameOverState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("assets/gameover.png",
-		"gameovertext", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
-	if (!TheTextureManager::Instance()->load("assets/main.png",
-		"mainbutton", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
-	if (!TheTextureManager::Instance()->load("assets/restart.png",
-		"restartbutton", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
 
 	StateParser stateParser;
 	stateParser.parseState("text.xml", s_gameOverID, &m_gameObjects, &m_textureIDList);
@@ -66,9 +51,6 @@ bool GameOverState::onExit()
 
 	m_gameObjects.clear();
 
-	TheTextureManager::Instance()->clearFromTextureMap("gameovertext");
-	TheTextureManager::Instance()->clearFromTextureMap("mainbutton");
-	TheTextureManager::Instance()->clearFromTextureMap("restartbutton");
 	return true;
 }
 void GameOverState::update()
@@ -88,14 +70,12 @@ void GameOverState::render()
 
 void GameOverState::s_gameOverToMain()
 {
-	/*TheGame::Instance()->getStateMachine()->changeState(
-		new MenuState());*/
+	//TheGame::Instance()->getStateMachine()->changeState(new MainMenuState());
 	TheGame::Instance()->setState(State::Menu);
 }
 
 void GameOverState::s_restartPlay()
 {
-	/*TheGame::Instance()->getStateMachine()->changeState(
-		new PlayState());*/
+	//TheGame::Instance()->getStateMachine()->changeState(new PlayState());
 	TheGame::Instance()->setState(State::Play);
 }

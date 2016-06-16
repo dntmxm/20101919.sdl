@@ -23,7 +23,7 @@ public:
 	bool registerType(std::string typeID, BaseCreator* pCreator)
 	{
 		std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
-		if (it == m_creators.end())
+		if (it != m_creators.end())
 		{
 			delete pCreator;
 			return false;

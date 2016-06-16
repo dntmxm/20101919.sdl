@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "PauseState.h"
 #include "Game.h"
-#include "MenuState.h"
+#include "MainMenuState.h"
 #include "GameStateMachine.h"
 #include "InputHandler.h"
 #include "PlayState.h"
@@ -12,15 +12,6 @@
 const std::string PauseState::s_pauseID = "PAUSE";
 bool PauseState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("assets/resume.png",
-		"resumebutton", TheGame::Instance()->getRenderer())) {
-		return false;
-	}
-
-	if (!TheTextureManager::Instance()->load("assets/main.png",
-		"mainbutton", TheGame::Instance()->getRenderer())) {
-		return false;
-	}
 	// parse the state
 	StateParser stateParser;
 	stateParser.parseState("text.xml", s_pauseID, &m_gameObjects, &m_textureIDList);
@@ -61,8 +52,7 @@ bool PauseState::onExit()
 	}
 
 	m_gameObjects.clear();
-	TheTextureManager::Instance()->clearFromTextureMap("resumebutton");
-	TheTextureManager::Instance()->clearFromTextureMap("mainbutton");
+
 
 	// reset the mouse button states to false
 
@@ -89,13 +79,11 @@ void PauseState::render()
 }
 void PauseState::s_pauseToMain()
 {
-	/*TheGame::Instance()->getStateMachine()->changeState(
-		new MenuState());*/
+	//TheGame::Instance()->getStateMachine()->changeState(new MainMenuState());
 	TheGame::Instance()->setState(State::Menu);
 }
 void PauseState::s_resumePlay()
 {
-	/*TheGame::Instance()->getStateMachine()->changeState(
-		new PlayState());*/
+	/*TheGame::Instance()->getStateMachine()->changeState(new PlayState());*/
 	TheGame::Instance()->setState(State::Play);
 }

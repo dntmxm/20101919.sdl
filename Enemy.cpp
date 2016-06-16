@@ -41,6 +41,6 @@ void Enemy::handleInput()
 
 void Enemy::load(const LoaderParams* pParam)
 {
-	AnimatedGraphic::load(pParam);
 	m_velocity.setY(2);
+	AnimatedGraphic::load(pParam);
 }
